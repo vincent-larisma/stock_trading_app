@@ -1,0 +1,23 @@
+<h1>Transactions</h1>
+<h1><%= link_to "Portfolio", stocks_path %></h1>
+
+<table>
+    <tr>
+        <th>Date</th>
+        <th>Company name</th>
+        <th>Shares</th>
+        <th>Price ($)</th>
+        <th>Total</th>
+        <th>Type</th>
+    </tr>
+    <% @transactions.each do |transactions| %>
+        <tr>
+            <td><%= transactions.created_at %></td>
+            <td><%= transactions.company_name %></td>
+            <td><%= transactions.shares %></td>
+            <td><%= transactions.cost_price %></td>
+            <td><%= (transactions.shares).to_i * (transactions.cost_price).to_i %></td>
+            <td><%= transactions.action_type %></td>
+        </tr>
+    <% end %>
+</table>

@@ -1,0 +1,28 @@
+<h1>Portfolio</h1>
+<h1><%= link_to "Transactions", transactions_path %></h1>
+
+<table>
+    <tr>
+        <th>Symbol</th>
+        <th>Company name</th>
+        <th>Shares</th>
+        <th>Cost price ($)</th>
+        <th>Total</th>
+        <th>Action</th>
+    </tr>
+    <% @stocks.each do |stock| %>
+        <tr>
+            <td><%= stock.symbol %></td>
+            <td><%= stock.company_name %></td>
+            <td><%= stock.shares %></td>
+            <td><%= stock.cost_price %></td>
+            <td><%= stock.shares * stock.cost_price %></td>
+            <td>
+                <button>Sell</button>
+                <button>Buy</button>
+            </td>
+        </tr>
+    <% end %>
+</table>
+
+<%= link_to "Buy Stock", new_stock_path  %>
