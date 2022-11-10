@@ -1,5 +1,5 @@
 class StocksController < ApplicationController
-    before_action :authenticate_user!
+    # before_action :authenticate_user!
     def index
         @stocks = Stock.all
     end
@@ -9,9 +9,10 @@ class StocksController < ApplicationController
     end
 
     def create
-        @stock = Stock.find_or_create_by(symbol: params[:symbol]) 
+        @stock = Stock.find_or_initialize_by(symbol: stock_params[:symbol])
+        @stock.shares += stock_params[:shares].to_i
 
-        if @stock.update(stock_params)
+        if @stock.update(stock_params.except(:shares))
             @stock.transactions.create(action_type: 'buy', company_name: @stock.company_name, shares: @stock.shares, cost_price: @stock.cost_price)
             redirect_to root_path
         else
