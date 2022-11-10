@@ -3,6 +3,10 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.1.2'
 
+gem 'devise', '~> 4.8', '>= 4.8.1'
+
+gem 'net-smtp', require: false
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.7'
 # Use postgresql as the database for Active Record
