@@ -1,0 +1,17 @@
+<h1>This should be where we create or buy stock</h1>
+
+<%= form_with model: @stock do |form| %>
+    <%= form.label :symbol %>
+    <%= form.text_field :symbol  %>
+
+    <%= form.label :company_name %>
+    <%= form.text_field :company_name %>
+    
+    <%= form.label :shares %>
+    <%= form.number_field :shares %>
+
+    <%= form.label :cost_price %>
+    <%= form.number_field :cost_price %>
+    
+    <%= form.submit %>
+<% end %>
