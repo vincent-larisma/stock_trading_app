@@ -18,11 +18,11 @@
             <td><%= stock.cost_price %></td>
             <td><%= stock.shares * stock.cost_price %></td>
             <td>
-                <button>Sell</button>
-                <button>Buy</button>
+                <%= button_to "Sell", sell_stock_path(stock.symbol), method: :get %>
+                <%= button_to "Buy", buy_stock_path(stock.symbol), method: :get %>
             </td>
         </tr>
     <% end %>
 </table>
 
-<%= link_to "Buy Stock", new_stock_path  %>
+<%= link_to "Buy Stock", find_stock_path  %>
