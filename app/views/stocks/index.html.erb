@@ -1,6 +1,15 @@
-<h1>Portfolio</h1>
-<h1><%= link_to "Transactions", transactions_path %></h1>
+<h1 style="text-align:center;"> 
+<% if current_user.admin? %> 
+    Hello, Admin!
+<% else %>
+    Hello, Trader!
+<% end %>
+</h1>
 
+
+<h1>Portfolio</h1>
+</br>
+<h1> <%= link_to "Transactions", transactions_path %></h1>
 <table>
     <tr>
         <th>Symbol</th>
