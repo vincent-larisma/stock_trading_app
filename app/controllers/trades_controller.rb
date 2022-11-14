@@ -1,5 +1,5 @@
 class TradesController < ApplicationController
-    before_action :initialize_stock, only: [:find_stock, :buy_stock]
+    before_action :initialize_stock
 
     def find_stock
         begin
@@ -12,7 +12,14 @@ class TradesController < ApplicationController
     end
 
     def sell_stock
-       
+        begin
+            @quote = @client.quote(params[:symbol])
+            @stock = Stock.find_by(symbol: params[:symbol])
+
+        rescue IEX::Errors::SymbolNotFoundError
+            flash[:error] = "Sorry, the symbol is not valid."
+            render :find_stock 
+        end
     end
 
     def buy_stock
