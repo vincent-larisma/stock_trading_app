@@ -1,0 +1,16 @@
+<h1>Sell Page</h1>
+
+<h1>Selling <%= @quote.company_name %>(<%= @quote.symbol %>)</h1>
+
+<table>
+<tr><th>Symbol</th><td><%= @quote.symbol %></td></tr>
+<tr><th>Company Name</th><td><%= @quote.company_name %></td></tr>
+<tr><th>Price</th><td><%= @quote.latest_price %></td></tr>
+</table>
+
+<%= form_with model: @stock do |form| %>
+    <%= form.label :shares %>
+    <%= form.number_field :shares %>
+    <%= hidden_field_tag :symbol, @quote.symbol  %>
+    <%= form.submit "Sell Stock" %>
+<% end %>
