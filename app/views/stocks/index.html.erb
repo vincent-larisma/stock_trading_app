@@ -30,11 +30,37 @@
             <td><%= stock.cost_price %></td>
             <td><%= stock.shares * stock.cost_price %></td>
             <td>
-                <button>Sell</button>
-                <button>Buy</button>
+                <%= button_to "Sell", sell_stock_path(stock.symbol), method: :get %>
+                <%= button_to "Buy", buy_stock_path(stock.symbol), method: :get %>
             </td>
         </tr>
     <% end %>
 </table>
 
-<%= link_to "Buy Stock", new_stock_path  %>
+<h1>Previous Owned Stock</h1>
+
+<table>
+    <tr>
+        <th>Symbol</th>
+        <th>Company name</th>
+        <th>Shares</th>
+        <th>Cost price ($)</th>
+        <th>Total</th>
+        <th>Action</th>
+    </tr>
+    <% @previous_stocks.each do |p_stock| %>
+        <tr>
+            <td><%= p_stock.symbol %></td>
+            <td><%= p_stock.company_name %></td>
+            <td><%= p_stock.shares %></td>
+            <td><%= p_stock.cost_price %></td>
+            <td><%= p_stock.shares * p_stock.cost_price %></td>
+            <td>
+                <%= button_to "Buy Again", buy_stock_path(p_stock.symbol), method: :get %>
+            </td>
+        </tr>
+    <% end %>
+</table>
+
+<%= link_to "Buy Stock", find_stock_path  %>
+

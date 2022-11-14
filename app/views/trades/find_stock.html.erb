@@ -1,0 +1,7 @@
+<h1>Find Stock</h1>
+
+<%= form_with url: find_stock_path, method: :get do |form| %>
+  <%= form.label "Search Stock"%>
+  <%= form.text_field :search_stock %>
+  <%= form.submit "Search" %>
+<% end %>
