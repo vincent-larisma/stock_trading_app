@@ -1,8 +1,10 @@
 <h1 style="text-align:center;"> 
 <% if current_user.admin? %> 
-    Hello, Admin!
+    Hello, Admin '<%= current_user.email.split('@')[0].capitalize %>'
 <% else %>
-    Hello, Trader!
+    Hello, Trader <%= current_user.email.split('@')[0].capitalize %>
+    </br>
+    Your account is currently <%= current_user.account_status %>
 <% end %>
 </h1>
 
