@@ -1,16 +1,16 @@
 class StocksController < ApplicationController
-    # before_action :authenticate_user!
+    before_action :authenticate_user!
     before_action :initialize_stock, only: [:create, :update]
 
     def index
-        @stocks = Stock.where("shares > ?", 0)
-        @previous_stocks = Stock.where("shares = ?", 0)
+        @stocks = current_user.stocks.where("shares > ?", 0)
+        @previous_stocks = current_user.stocks.where("shares = ?", 0)
     end
 
     def create
         begin    
             @quote = @client.quote(params[:symbol])
-            @stock = Stock.find_or_initialize_by(symbol: params[:symbol])
+            @stock = current_user.stocks.find_or_initialize_by(symbol: params[:symbol])
 
             #manually add params
             @stock.shares += stock_params[:shares].to_i
@@ -19,7 +19,7 @@ class StocksController < ApplicationController
             @stock.cost_price = @quote.latest_price
 
             if @stock.save
-                @stock.transactions.create(action_type: 'buy', company_name: @quote.company_name, shares: @stock.shares, cost_price: @quote.latest_price)
+                current_user.transactions.create(action_type: 'buy', company_name: @quote.company_name, shares: @stock.shares, cost_price: @quote.latest_price)
                 redirect_to root_path
             else
                 redirect_to find_stock_path
@@ -34,7 +34,7 @@ class StocksController < ApplicationController
     def update
         begin    
             @quote = @client.quote(params[:symbol])
-            @stock = Stock.find_by(symbol: params[:symbol])
+            @stock = current_user.stocks.find_by(symbol: params[:symbol])
 
             #manually add params
             @stock.shares -= stock_params[:shares].to_i
@@ -44,7 +44,7 @@ class StocksController < ApplicationController
 
             if @stock.shares >= 0
                 @stock.save
-                @stock.transactions.create(action_type: 'sell', company_name: @quote.company_name, shares: @stock.shares, cost_price: @quote.latest_price)
+                current_user.transactions.create(action_type: 'sell', company_name: @quote.company_name, shares: @stock.shares, cost_price: @quote.latest_price)
                 redirect_to root_path
             else
                 flash[:error] = "Sorry, cannot be negative."

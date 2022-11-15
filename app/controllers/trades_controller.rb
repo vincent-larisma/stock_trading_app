@@ -1,4 +1,5 @@
 class TradesController < ApplicationController
+    before_action :authenticate_user!
     before_action :initialize_stock
 
     def find_stock
@@ -14,7 +15,7 @@ class TradesController < ApplicationController
     def sell_stock
         begin
             @quote = @client.quote(params[:symbol])
-            @stock = Stock.find_by(symbol: params[:symbol])
+            @stock = current_user.stocks.find_by(symbol: params[:symbol])
 
         rescue IEX::Errors::SymbolNotFoundError
             flash[:error] = "Sorry, the symbol is not valid."
@@ -25,7 +26,7 @@ class TradesController < ApplicationController
     def buy_stock
         begin
             @quote = @client.quote(params[:symbol])
-            @stock = Stock.new
+            @stock = current_user.stocks.build
 
         rescue IEX::Errors::SymbolNotFoundError
             flash[:error] = "Sorry, the symbol is not valid."
