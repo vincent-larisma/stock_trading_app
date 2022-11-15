@@ -14,7 +14,7 @@ class User < ApplicationRecord
     after_initialize :set_account_approved, :if  => :new_record?
   end
 
-  if User.count != 0
+  if User.count >= 1
     enum role: [:trader, :admin]
     after_initialize :set_default_role_trader, :if  => :new_record?
     enum account_status: [:pending, :approved]
