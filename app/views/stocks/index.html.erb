@@ -43,18 +43,14 @@
     <tr>
         <th>Symbol</th>
         <th>Company name</th>
-        <th>Shares</th>
         <th>Cost price ($)</th>
-        <th>Total</th>
         <th>Action</th>
     </tr>
     <% @previous_stocks.each do |p_stock| %>
         <tr>
             <td><%= p_stock.symbol %></td>
             <td><%= p_stock.company_name %></td>
-            <td><%= p_stock.shares %></td>
             <td><%= p_stock.cost_price %></td>
-            <td><%= p_stock.shares * p_stock.cost_price %></td>
             <td>
                 <%= button_to "Buy Again", buy_stock_path(p_stock.symbol), method: :get %>
             </td>
