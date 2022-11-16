@@ -1,6 +1,6 @@
 <h1>Creating a New User Manually</h1>
 
-<%= form_with model: @user, url: new_admin_user_path do |f| %>
+<%= form_with model: [ :admin, @user] do |f| %>
     <div class="field">
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
@@ -17,7 +17,7 @@
   </div>
 
   <div class="actions">
-    <%= f.submit "Sign up" %>
+    <%= f.submit "Create User" %>
   </div>
 <% end %>
 

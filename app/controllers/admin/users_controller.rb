@@ -8,7 +8,7 @@ class Admin::UsersController < ApplicationController
     end
 
     def create
-        @user = User.new(params[:user])
+        @user = User.new(user_params)
     
         if params[:user][:password].blank?
           params[:user].delete(:password)
@@ -17,10 +17,16 @@ class Admin::UsersController < ApplicationController
     
         respond_to do |format|
           if @user.save
-            format.html { redirect_to users_path, notice: 'User was successfully created.' }
+            format.html { redirect_to admin_users_path, notice: 'User was successfully created.' }
           else
-            format.html { render action: "new" }
+            format.html { render :new }
           end
         end
+    end
+
+    private
+
+    def user_params
+        params.require(:user).permit(:email, :password, :password_confirmation)
     end
 end
