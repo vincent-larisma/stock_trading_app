@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
   root "stocks#index"
-  get 'home/index'
   devise_for :users
   resources :stocks 
   resources :transactions
