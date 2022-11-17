@@ -1,0 +1,21 @@
+<h1>All Users</h1>
+
+<%= link_to "Create User", new_admin_user_path %>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Email</th>
+        <th>Role</th>
+        <th>Account Status</th>
+    </tr>
+
+    <% @users.each do |user| %>
+        <tr>
+            <td><%= user.id %></td>
+            <td><%= user.email %></td>
+            <td><%= user.role %></td>
+            <td><%= user.account_status %></td>
+        </tr>
+    <% end %>
+</table>
