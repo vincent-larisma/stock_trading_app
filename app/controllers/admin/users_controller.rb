@@ -24,6 +24,10 @@ class Admin::UsersController < ApplicationController
         end
     end
 
+    def pending_accounts
+
+    end
+
     private
 
     def user_params
