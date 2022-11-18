@@ -4,8 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :confirmable
 
-  has_many :stocks
-  has_many :transactions
+  has_many :stocks, dependent: :delete_all
+  has_many :transactions, dependent: :delete_all
 
   if User.count == 0
     enum role: [:trader, :admin]
@@ -32,6 +32,6 @@ class User < ApplicationRecord
   end
 
   def set_account_approved
-    self.account_status ||= :approved
+    self.account_status = :approved
   end
 end

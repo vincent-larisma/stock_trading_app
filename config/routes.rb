@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   
   namespace :admin do
     resources :users
+    get "/transactions", to: "users#all_transactions"
   end
 
   resources :stocks 
