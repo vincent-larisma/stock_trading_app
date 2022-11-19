@@ -6,7 +6,7 @@ class User < ApplicationRecord
 
   has_many :stocks, dependent: :delete_all
   has_many :transactions, dependent: :delete_all
-
+  
   if User.count == 0
     enum role: [:trader, :admin]
     after_initialize :set_default_role_admin, :if  => :new_record?

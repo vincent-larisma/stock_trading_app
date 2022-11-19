@@ -27,7 +27,7 @@
         <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
 
         <tr>
-            <th><%= button_to "Delete" %></th>
+            <th><%= button_to "Delete", admin_user_path(@user.id), method: :delete, data: {confirm: "Are you sure?"} %></th>
             <th><%= form.submit "Update User" %></th>
         </tr>
     </table>

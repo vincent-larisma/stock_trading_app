@@ -50,10 +50,6 @@ class Admin::UsersController < ApplicationController
     redirect_to admin_users_path
   end
 
-  def all_transactions
-    @transactions = Transaction.all
-  end
-
   private
 
   def user_params
