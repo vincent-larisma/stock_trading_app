@@ -1,6 +1,7 @@
 class Admin::UsersController < ApplicationController
     def index
         @users = User.all
+        @traders = User.where(account_status: :pending)
     end
 
     def new
@@ -24,6 +25,16 @@ class Admin::UsersController < ApplicationController
         end
     end
 
+    def update
+      @user = User.find(params[:id])
+
+      if @user.update(user_params)
+        redirect_to admin_pending_index_path, notice: "Trader has been approved"
+      else
+        render :edit, status: :unprocessable_entity
+      end
+    end
+
     def pending_accounts
 
     end
@@ -31,6 +42,6 @@ class Admin::UsersController < ApplicationController
     private
 
     def user_params
-        params.require(:user).permit(:email, :password, :password_confirmation)
+        params.require(:user).permit(:email, :password, :password_confirmation, :role, :account_status)
     end
 end

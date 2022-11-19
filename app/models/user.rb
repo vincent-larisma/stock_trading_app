@@ -7,35 +7,15 @@ class User < ApplicationRecord
   has_many :stocks
   has_many :transactions
 
-  if User.count == 0
-    enum role: [:trader, :admin]
-    after_initialize :set_default_role_admin, :if  => :new_record?
-    enum account_status: [:pending, :approved, :null]
-    after_initialize :set_account_null, :if  => :new_record?
-  else
-    enum role: [:trader, :admin]
-    after_initialize :set_default_role_trader, :if  => :new_record?
-    enum account_status: [:pending, :approved, :null]
-    after_initialize :set_account_pending, :if  => :new_record?
+  enum role: [:trader, :admin]
+  enum account_status: [:pending, :approved, :null]
+  after_initialize :set_default_role_and_account_status, :if  => :new_record?
+
+  private
+
+  def set_default_role_and_account_status
+    self.role = :trader
+    self.account_status = :pending
   end
 
-  def set_default_role_trader
-    self.role ||= :trader
-  end
-
-  def set_default_role_admin
-    self.role ||= :admin
-  end
-
-  def set_account_pending
-    self.account_status ||= :pending
-  end
-
-  def set_account_approved
-    self.account_status ||= :approved
-  end
-
-  def set_account_null
-    self.account_status ||= :null
-  end
 end

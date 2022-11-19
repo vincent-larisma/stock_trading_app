@@ -1,0 +1,42 @@
+<h3> All users </h3>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Email</th>
+        <th>Role</th>
+        <th>Account Status</th>
+    </tr>
+    
+    <% @users.each do |user| %>
+        <tr>
+            <td><%= user.id %></td>
+            <td><%= user.email %></td>
+            <td><%= user.role %></td>
+            <td><%= user.account_status %></td>
+        </tr>
+    <% end %>
+</table>
+
+<h3> Pending Traders </h3>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Email</th>
+        <th>Role</th>
+        <th>Account Status</th>
+    </tr>
+    
+    <% @traders.each do |trader| %>
+        <tr>
+            <td><%= trader.id %></td>
+            <td><%= trader.email %></td>
+            <td><%= trader.role %></td>
+            <td> 
+                <%= form_with model: [:admin, User.find(trader.id)] do |f|%>
+                    <%= f.hidden_field :account_status, value: "approved" %>
+                    <%= f.submit "Approve User" %>
+                <% end %>
+            </td>
+        </tr>
+    <% end %>
+</table>

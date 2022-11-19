@@ -4,10 +4,10 @@ Rails.application.routes.draw do
   
   namespace :admin do
     resources :users
+    resources :pending, only: [:index]
   end
 
   resources :stocks 
-  
   resources :transactions
 
   
