@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   
   namespace :admin do
     resources :users
+    resources :transactions, only: [:index]
   end
 
   resources :stocks 

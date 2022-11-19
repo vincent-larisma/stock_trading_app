@@ -1,0 +1,21 @@
+<h1>Transactions</h1>
+
+<table>
+    <tr>
+        <th>Company Name</th>
+        <th>Shares</th>
+        <th>Cost Price</th>
+        <th>User</th>
+        <th>Type</th>
+    </tr>
+
+    <% @transactions.each do |transaction| %>
+        <tr>
+            <td><%= transaction.company_name %></td>
+            <td><%= transaction.shares %></td>
+            <td><%= transaction.cost_price %></td>
+            <td><%= User.find(transaction.user_id).email %></td>
+            <td><%= transaction.action_type %></td>
+        </tr>
+    <% end %>
+</table>
