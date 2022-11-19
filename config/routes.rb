@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   end
 
   resources :stocks 
+  
   resources :transactions
 
   
