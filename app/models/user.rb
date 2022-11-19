@@ -11,11 +11,10 @@ class User < ApplicationRecord
   enum account_status: [:pending, :approved, :null]
   after_initialize :set_default_role_and_account_status, :if  => :new_record?
 
-  private
 
+  private
   def set_default_role_and_account_status
     self.role = :trader
     self.account_status = :pending
   end
-
 end
