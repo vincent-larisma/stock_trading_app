@@ -1,21 +1,21 @@
 <h1>Transactions</h1>
-
-<table>
+<table class="table" id="transaction-user-table">
+  <thead>
     <tr>
-        <th>Company Name</th>
-        <th>Shares</th>
-        <th>Cost Price</th>
-        <th>User</th>
-        <th>Type</th>
+      <th scope="col">Company Name</th>
+      <th scope="col">Shares</th>
+      <th scope="col">Cost Price</th>
+      <th scope="col">User</th>
+      <th scope="col">Type</th>
     </tr>
-
-    <% @transactions.each do |transaction| %>
-        <tr>
-            <td><%= transaction.company_name %></td>
-            <td><%= transaction.shares %></td>
-            <td><%= transaction.cost_price %></td>
-            <td><%= User.find(transaction.user_id).email %></td>
-            <td><%= transaction.action_type %></td>
-        </tr>
+  </thead>
+  <% @transactions.each do |transaction| %>
+    <tr>
+      <th scope="row"><%= transaction.company_name %>asdfsadf</th>
+      <td><%= transaction.shares %></td>
+      <td><%= transaction.cost_price %></td>
+      <td><%= User.find(transaction.user_id).email %></td>
+      <td><%= transaction.action_type %></td>
+    </tr>
     <% end %>
 </table>

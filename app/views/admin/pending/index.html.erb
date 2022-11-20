@@ -1,0 +1,24 @@
+<h1>All Users</h1>
+<table class="table" id="admin-user-table">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Email</th>
+      <th scope="col">Role</th>
+      <th scope="col">Approval</th>
+    </tr>
+  </thead>
+  <% @traders.each do |trader| %>
+    <tr>
+      <th scope="row"><%= trader.id %></th>
+      <td><%= trader.email %></td>
+      <td><%= trader.role %></td>
+      <td> 
+                <%= form_with model: [:admin, User.find(trader.id)] do |f|%>
+                    <%= f.hidden_field :account_status, value: "approved" %>
+                    <%= f.submit "Approve User" %>
+                <% end %>
+            </td>
+    </tr>
+    <% end %>
+</table>

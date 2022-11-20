@@ -37,6 +37,7 @@ class Admin::UsersController < ApplicationController
     @user = User.find(params[:id])
     
     if @user.update(user_params)
+      ApproveEmailMailer.approve_trader_email(@user).deliver_now
       redirect_to admin_user_path(params[:id])
     else
       render :edit
@@ -44,16 +45,19 @@ class Admin::UsersController < ApplicationController
     
   end
 
+
   def destroy
     @user = User.find(params[:id])
     @user.destroy
     redirect_to admin_users_path
   end
 
+
   private
 
-  def user_params
-      params.require(:user).permit(:email, :password, :password_confirmation, :account_status)
-  end
+
+    def user_params
+        params.require(:user).permit(:email, :password, :password_confirmation, :role, :account_status)
+    end
 
 end
