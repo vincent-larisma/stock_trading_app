@@ -1,7 +1,7 @@
 <h1 style="text-align:center;"> 
 <% if current_user.admin? %> 
     Hello, Admin '<%= current_user.email.split('@')[0].capitalize %>'
-    
+    <br>
     <%= link_to "See All Users", admin_users_path %>
 <% else %>
     Hello, Trader <%= current_user.email.split('@')[0].capitalize %>
@@ -61,5 +61,7 @@
 </table>
 
 <%= link_to "Buy Stock", find_stock_path  %>
+<br>
+<%= link_to "Log out", destroy_user_session_path, method: :delete%>
 
 
