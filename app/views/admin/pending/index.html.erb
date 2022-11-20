@@ -1,42 +1,24 @@
-<h3> All users </h3>
-<table>
+<h1>All Users</h1>
+<table class="table" id="admin-user-table">
+  <thead>
     <tr>
-        <th>ID</th>
-        <th>Email</th>
-        <th>Role</th>
-        <th>Account Status</th>
+      <th scope="col">ID</th>
+      <th scope="col">Email</th>
+      <th scope="col">Role</th>
+      <th scope="col">Approval</th>
     </tr>
-    
-    <% @users.each do |user| %>
-        <tr>
-            <td><%= user.id %></td>
-            <td><%= user.email %></td>
-            <td><%= user.role %></td>
-            <td><%= user.account_status %></td>
-        </tr>
-    <% end %>
-</table>
-
-<h3> Pending Traders </h3>
-<table>
+  </thead>
+  <% @traders.each do |trader| %>
     <tr>
-        <th>ID</th>
-        <th>Email</th>
-        <th>Role</th>
-        <th>Account Status</th>
-    </tr>
-    
-    <% @traders.each do |trader| %>
-        <tr>
-            <td><%= trader.id %></td>
-            <td><%= trader.email %></td>
-            <td><%= trader.role %></td>
-            <td> 
+      <th scope="row"><%= trader.id %>asdfsadf</th>
+      <td><%= trader.email %></td>
+      <td><%= trader.role %></td>
+      <td> 
                 <%= form_with model: [:admin, User.find(trader.id)] do |f|%>
                     <%= f.hidden_field :account_status, value: "approved" %>
                     <%= f.submit "Approve User" %>
                 <% end %>
             </td>
-        </tr>
+    </tr>
     <% end %>
 </table>
