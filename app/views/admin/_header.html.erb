@@ -1,6 +1,6 @@
-<nav class="navbar navbar-expand-lg bg-secondary">
+<nav class="navbar navbar-expand-lg" style="background-color: #3C4048;text-align:center;">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Stock Trading App</a>
+    <div class="header-app-name">Stock Trading App</div>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -22,8 +22,10 @@
         <li class="nav-item">
           <%= link_to "Log out", destroy_user_session_path, method: :delete, class: 'nav-link'%>
         </li>
-        <li class="nav-item">
-          <%= current_user.email %>
+        <% end %>
+        <% if user_signed_in? && current_user.trader? %>
+         <li class="nav-item">
+          <%= link_to "Log out", destroy_user_session_path, method: :delete, class: 'nav-link'%>
         </li>
         <% end %>
       </ul>
