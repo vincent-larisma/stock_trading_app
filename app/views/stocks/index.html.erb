@@ -1,60 +1,72 @@
-<h1 style="text-align:center;"> 
-<% if current_user.trader? %> 
-    Hello, Trader <%= current_user.email.split('@')[0].capitalize %>
-    </br>
-    Your account is currently <%= current_user.account_status %>
-    </h1>
-<h1>Portfolio</h1>
-</br>
-<table>
-    <tr>
-        <th>Symbol</th>
-        <th>Company name</th>
-        <th>Shares</th>
-        <th>Cost price ($)</th>
-        <th>Total</th>
-        <th>Action</th>
-    </tr>
-    <% @stocks.each do |stock| %>
-        <tr>
-            <td><%= stock.symbol %></td>
-            <td><%= stock.company_name %></td>
-            <td><%= stock.shares %></td>
-            <td><%= stock.cost_price %></td>
-            <td><%= stock.shares * stock.cost_price %></td>
-            <td>
-                <%= button_to "Sell", sell_stock_path(stock.symbol), method: :get %>
-                <%= button_to "Buy", buy_stock_path(stock.symbol), method: :get %>
-            </td>
-        </tr>
-    <% end %>
-</table>
+<div class="container my-5">
+    <div class="row">
+        <div class="col">
+            <h1>My Portfolio</h1>
+        </div>
+    </div>
+    <div class="row mb-1">
+        <div class="col d-flex flex-row justify-content-end ">
+            <%= button_to "+ Buy Stock", find_stock_path, method: :get, class: "mx-1 btn btn-dark rounded-0"  %>
+            <button type="button" class="mx-1 btn btn-info rounded-0" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                History
+            </button>
+        </div>
+    </div>
+    <div class="row">
+        <table class="table table-bordered text-center">
+            <thead>
+                <tr class="bg-dark text-light">
+                    <th scope="col">Symbol</th>
+                    <th scope="col">Company name</th>
+                    <th scope="col">Shares</th>
+                    <th scope="col">Cost price ($)</th>
+                    <th scope="col">Total</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody class="table-group-divider">
+                <% if @stocks.count > 0 %>
+                    <% @stocks.each do |stock| %>
+                    <tr>
+                        <td><%= stock.symbol %></td>
+                        <td><%= stock.company_name %></td>
+                        <td><%= stock.shares %></td>
+                        <td><%= number_to_currency(stock.cost_price) %></td>
+                        <td><%= number_to_currency(stock.shares * stock.cost_price) %></td>
+                        <td>
+                            <div class="d-flex flex-row justify-content-center">
+                                <%= button_to "Sell", sell_stock_path(stock.symbol), method: :get, class: "btn btn-outline-danger mx-2" %>
+                                <%= button_to "Buy", buy_stock_path(stock.symbol), method: :get, class: "btn btn-outline-success mx-2" %>
+                            </div>
+                        </td>
+                    </tr>
+                    <% end %>
+                <% else %>
+                <tr>
+                    <td colspan="6">
+                        <h2 class="m-5">No Records Found...</h2>
+                    </td>
+                </tr>
+                <% end %>
+            </tbody>
+        </table>
+    </div>
+</div>
 
-<h1>Previous Owned Stock</h1>
+<%= render "partials/modal" %>
 
-<table>
-    <tr>
-        <th>Symbol</th>
-        <th>Company name</th>
-        <th>Cost price ($)</th>
-        <th>Action</th>
-    </tr>
-    <% @previous_stocks.each do |p_stock| %>
-        <tr>
-            <td><%= p_stock.symbol %></td>
-            <td><%= p_stock.company_name %></td>
-            <td><%= p_stock.cost_price %></td>
-            <td>
-                <%= button_to "Buy Again", buy_stock_path(p_stock.symbol), method: :get %>
-            </td>
-        </tr>
-    <% end %>
-</table>
 
-<%= link_to "Buy Stock", find_stock_path  %>
-<br>
-<%= link_to "Log out", destroy_user_session_path, method: :delete%>
-<% end %>
+
+
+
+
+
+
+
+
+
+
+
 
 
 

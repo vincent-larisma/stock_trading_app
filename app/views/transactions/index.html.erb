@@ -1,23 +1,45 @@
-<h1>Transactions</h1>
-<h1><%= link_to "Portfolio", stocks_path %></h1>
-
-<table>
-    <tr>
-        <th>Date</th>
-        <th>Company name</th>
-        <th>Shares</th>
-        <th>Price ($)</th>
-        <th>Total</th>
-        <th>Type</th>
-    </tr>
-    <% @transactions.each do |transactions| %>
-        <tr>
-            <td><%= transactions.created_at %></td>
-            <td><%= transactions.company_name %></td>
-            <td><%= transactions.shares %></td>
-            <td><%= transactions.cost_price %></td>
-            <td><%= (transactions.shares).to_i * (transactions.cost_price).to_i %></td>
-            <td><%= transactions.action_type %></td>
-        </tr>
-    <% end %>
-</table>
+<div class="container my-5">
+    <div class="row">
+        <div class="col">
+            <h1>Transactions</h1>
+        </div>
+    </div>
+    <div class="row">
+        <table class="table table-bordered text-center">
+            <thead>
+                <tr class="bg-dark text-light">
+                    <th scope="col">Date</th>
+                    <th scope="col">Company name</th>
+                    <th scope="col">Shares</th>
+                    <th scope="col">Price ($)</th>
+                    <th scope="col">Total</th>
+                    <th scope="col">Type</th>
+                </tr>
+            </thead>
+            <tbody class="table-group-divider">
+                <% if @transactions.count > 0 %>
+                     <% @transactions.each do |transactions| %>
+                        <tr>
+                            <td><%= transactions.created_at %></td>
+                            <td><%= transactions.company_name %></td>
+                            <td><%= transactions.shares %></td>
+                            <td><%= number_to_currency(transactions.cost_price) %></td>
+                            <td><%= number_to_currency((transactions.shares).to_f * (transactions.cost_price).to_f) %></td>
+                            <% if transactions.action_type == "buy"%>
+                                <td class="text-success"> <%= transactions.action_type %> </td>
+                            <% else %>
+                                <td class="text-danger"> <%= transactions.action_type %> </td>
+                            <% end %>
+                        </tr>
+                    <% end %>
+                <% else %>
+                  <tr>
+                      <td colspan="6">
+                          <h2 class="m-5">No Transactions Yet...</h2>
+                      </td>
+                  </tr>
+                <% end %>
+            </tbody>
+        </table>
+    </div>
+</div>

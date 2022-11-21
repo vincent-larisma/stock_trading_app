@@ -13,7 +13,7 @@
     <tr>
       <th scope="row"><%= transaction.company_name %>asdfsadf</th>
       <td><%= transaction.shares %></td>
-      <td><%= transaction.cost_price %></td>
+      <td><%= number_to_currency(transaction.cost_price) %></td>
       <td><%= User.find(transaction.user_id).email %></td>
       <td><%= transaction.action_type %></td>
     </tr>
