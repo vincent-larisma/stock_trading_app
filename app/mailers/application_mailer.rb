@@ -7,6 +7,6 @@ class ApplicationMailer < ActionMailer::Base
   end
 
   def approve_trader_email(user)
-    mail(:to => user.email, :subject => "Your account has been approved")
+    mail(:to => user.email, :subject => "Your account has been approved. You can now buy and sell stocks!")
   end
 end

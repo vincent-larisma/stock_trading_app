@@ -1,34 +1,34 @@
-<h1>Edit User</h1>
-
+<div class="">
+  <section class="user-edit-form">
+  <p class="user-edit-tag"> Edit User </p> 
 <%= form_with model: [:admin, @user] do |form| %>
     <table>
         <tr>
-            <th><%= form.label :email %></th>
-            <td><%= form.text_field :email %></td>
+            <th ><%= form.label :email, class: "form-label" %></th>
+            <td><%= form.text_field :email, class: "form-control pl-3", class: "form-control" %></td>
         </tr>
         <tr>
             <th>
-                Role
+                 Role
             </th>
-            <td>
-                <%= @user.role %>
+            <td class="mb-3 text-center">
+                <%= @user.role  %>
             </td>
         </tr>
         <tr>
             <th>Account Status</th>
-            <td>
+            <td class="mb-3 text-center">
             <%= form.label :account_status do %>
                 <%= form.check_box :account_status, {}, "approved", "pending" %>
                 Mark as Approved?
             <% end %>
             </td>
         </tr>
-
         <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-
-        <tr>
-            <td></td>
-            <td><%= form.submit "Update User" %></td>
-        </tr>
-    </table>
+        </table>
+        <div class="actions d-flex justify-content-center mt-3">
+            <td><%= form.submit "Update User", class: "btn btn-primary w-50" %></td>
+       </div>
 <% end %>
+</section> 
+</div>

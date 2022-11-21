@@ -1,0 +1,104 @@
+.login-user-form {
+    position: absolute; 
+    left: 0;
+    right: 0;
+    margin: auto;  
+    width: 30%;
+    margin-top: 50px;
+    padding: 20px 20px;
+    border-radius: 10px;
+    background-color: white;
+    color: black;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
+}
+
+.login-user-tag {
+    display: flex;
+    justify-content: center;
+    font-size: 25px;
+}
+
+.login-icon i {
+    font-size: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.forgot-pasword-link {
+    text-decoration: none;
+    background-image: linear-gradient(
+    to right,
+    #0eb6f4,
+    #00bbff 50%,
+    #000 50%
+  );
+  background-size: 200% 100%;
+  background-position: -100%;
+  display: inline-block;
+  padding: 5px 0;
+  position: relative;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: all 0.3s ease-in-out;
+}
+
+.forgot-pasword-link:before {
+    content: '';
+    background: #54b3d6;
+    display: block;
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 0;
+    height: 3px;
+    transition: all 0.3s ease-in-out;
+  }
+
+.forgot-pasword-link:hover {
+    background-position: 0;
+}
+
+.forgot-pasword-link:hover::before {
+    width:100%;
+  }
+
+
+
+.signup-link, .didnt-receive-link {
+    text-decoration: none;
+    background-image: linear-gradient(
+    to right,
+    #54b3d6,
+    #54b3d6 50%,
+    #000 50%
+  );
+  background-size: 200% 100%;
+  background-position: -100%;
+  display: inline-block;
+  padding: 5px 0;
+  position: relative;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: all 0.3s ease-in-out;
+}
+
+.signup-link:before, .didnt-receive-link:before {
+    content: '';
+    background: #54b3d6;
+    display: block;
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 0;
+    height: 3px;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .signup-link:hover, .didnt-receive-link:hover{
+    background-position: 0;
+}
+
+.signup-link:hover::before, .didnt-receive-link:hover::before {
+    width:100%;
+  }

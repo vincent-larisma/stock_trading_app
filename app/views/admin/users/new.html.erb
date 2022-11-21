@@ -1,24 +1,26 @@
   <div class="">
     <section class="create-user-form">
-    <%= form_with model: [ :admin, @user] do |f| %>
-      <div class="mb-3">
-        <%= f.label :email, class: "form-label" %><br />
-        <%= f.email_field :email, autofocus: true, autocomplete: "", class: "form-control" %>
-      </div>
-      <div class="mb-3">
-        <%= f.label :password, class: "form-label" %><br />
-        <%= f.password_field :password, autocomplete: "", class: "form-control" %>
-      </div>
+      <p class="new-user-tag"> Create New User </p>
+      <hr>
+      <%= form_with model: [ :admin, @user] do |f| %>
+        <div class="mb-3">
+          <%= f.label :email, class: "form-label" %><br />
+          <%= f.email_field :email, autofocus: true, autocomplete: "off", class: "form-control" %>
+        </div>
+          <div class="mb-3">
+            <%= f.label :password, class: "form-label" %><br />
+            <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
+        </div>
 
-      <div class="mb-3">
-        <%= f.label :password_confirmation, class: "form-label" %><br />
-        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control"%>
-      </div>
-      <div class="actions d-flex justify-content-center">
-        <%= f.submit "Create User", class: "btn btn-primary w-25" %>
-      </div>
-    <% end %>
-    </section>
+        <div class="mb-3">
+          <%= f.label :password_confirmation, class: "form-label" %><br />
+          <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control"%>
+        </div>
+        <div class="actions d-flex justify-content-center">
+          <%= f.submit "Create User", class: "btn btn-primary w-25" %>
+        </div>
+      <% end %>
+    </section> 
   </div>
 
 
