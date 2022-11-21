@@ -2,7 +2,7 @@
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header bg-dark text-light">
-        <h1 class="modal-title fs-5 " id="staticBackdropLabel">History</h1>
+        <h1 class="modal-title fs-5 " id="staticBackdropLabel">Previously Owned Stocks</h1>
         <button type="button" class="btn-close bg-light" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -18,7 +18,7 @@
                         <td><%= p_stock.company_name %></td>
                         <td><%= number_to_currency(p_stock.cost_price) %></td>
                         <td>
-                            <%= button_to "Buy Again", buy_stock_path(p_stock.symbol), method: :get %>
+                            <%= button_to "Buy Again", buy_stock_path(p_stock.symbol), method: :get, class: "btn btn-success" %>
                         </td>
                     </tr>
                 <% end %>
