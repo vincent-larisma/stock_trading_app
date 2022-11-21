@@ -1,5 +1,5 @@
 class Admin::UsersController < ApplicationController
-  before_action :authenticate_user!, :is_admin?
+  before_action :authenticate_user!, :is_admin? 
  
   def index
       @users = User.where(role: :trader)
