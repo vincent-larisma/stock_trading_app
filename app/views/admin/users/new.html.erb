@@ -1,23 +1,26 @@
-<div class="create-user-container">
-  <div class="d-flex justify-content-center" id="create-user-form" style="background-color: #EAEAEA;">
+  <div class="">
+    <section class="create-user-form">
     <%= form_with model: [ :admin, @user] do |f| %>
-      <div class="form-group" id= "form-email">
+      <div class="mb-3">
         <%= f.label :email, class: "form-label" %><br />
-        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "create-user-input form-control" %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "", class: "form-control" %>
       </div>
-      <div class="form-group" id= "form-password">
+      <div class="mb-3">
         <%= f.label :password, class: "form-label" %><br />
-        <%= f.password_field :password, autocomplete: "new-password", class: "create-user-input form-control" %>
+        <%= f.password_field :password, autocomplete: "", class: "form-control" %>
       </div>
 
-      <div class="form-group" id= "form-confirm-password">
+      <div class="mb-3">
         <%= f.label :password_confirmation, class: "form-label" %><br />
-        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "create-user-input form-control"%>
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control"%>
       </div>
-      <div class="actions" id="create-user-btn">
-        <%= f.submit "Create User", class: "btn btn-primary" %>
+      <div class="actions d-flex justify-content-center">
+        <%= f.submit "Create User", class: "btn btn-primary w-25" %>
       </div>
     <% end %>
+    </section>
   </div>
-</div>
+
+
+
 
