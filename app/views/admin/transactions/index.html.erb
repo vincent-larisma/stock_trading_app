@@ -11,6 +11,7 @@
         </tr>
       </thead>
       <tbody class="table-group-divider">
+        <% if @transactions.count > 0 %>
         <% @transactions.each do |transaction| %>
           <tr>
             <td><%= transaction.company_name %>asdfsadf</td>
@@ -19,6 +20,13 @@
             <td><%= User.find(transaction.user_id).email %></td>
             <td><%= transaction.action_type %></td>
           </tr>
+        <% end %>
+        <% else %>
+        <tr>
+          <td colspan="6">
+            <h2 class="m-5">No Records Found...</h2>
+          </td>
+        </tr>
         <% end %>
       </body>
     </table>

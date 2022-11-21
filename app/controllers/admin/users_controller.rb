@@ -23,7 +23,7 @@ class Admin::UsersController < ApplicationController
       end
   
       if @user.save
-        redirect_to admin_users_path, notice: 'User was successfully created.' 
+        redirect_to admin_users_path, notice: "User with email #{@user.email} successfully created" 
       else
         render :new
       end
@@ -38,7 +38,7 @@ class Admin::UsersController < ApplicationController
     
     if @user.update(user_params)
       ApproveEmailMailer.approve_trader_email(@user).deliver_now
-      redirect_to admin_user_path(params[:id])
+      redirect_to admin_user_path(params[:id]), notice: 'Your account has been approved by the admin.'
     else
       render :edit
     end
@@ -49,7 +49,7 @@ class Admin::UsersController < ApplicationController
   def destroy
     @user = User.find(params[:id])
     @user.destroy
-    redirect_to admin_users_path
+    redirect_to admin_users_path, notice: "User #{@user.email} has been deleted."
   end
 
 
