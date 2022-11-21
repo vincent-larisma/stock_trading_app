@@ -1,6 +1,6 @@
 class StocksController < ApplicationController
     before_action :authenticate_user!
-    before_action :initialize_stock, :search_stock, only: [:create, :update]
+    before_action :initialize_stock, :search_stock_and_initialize, only: [:create, :update]
 
     def index
         @stocks = current_user.stocks.where("shares > ?", 0)
@@ -8,10 +8,10 @@ class StocksController < ApplicationController
     end
 
     def create
-        begin    
+        begin
         #manually add params
         @stock.shares += stock_params[:shares].to_i
-
+        
         if @stock.save
             current_user.transactions.create(action_type: 'buy', company_name: @quote.company_name, shares: @stock.shares, cost_price: @quote.latest_price)
             redirect_to root_path
@@ -27,7 +27,7 @@ class StocksController < ApplicationController
     end
 
     def update
-        begin    
+        begin
         #manually add params
         @stock.shares -= stock_params[:shares].to_i
 
@@ -55,13 +55,12 @@ class StocksController < ApplicationController
         params.require(:stock).permit(:symbol, :company_name, :shares, :cost_price)
     end
 
-    def search_stock
+    def search_stock_and_initialize
         @quote = @client.quote(params[:symbol])
-        @stock = current_user.stocks.find_by(symbol: params[:symbol])
-
+        @stock = current_user.stocks.find_or_initialize_by(symbol: params[:symbol])   
+            
         @stock.symbol = @quote.symbol
         @stock.company_name = @quote.company_name 
         @stock.cost_price = @quote.latest_price
-
     end
 end

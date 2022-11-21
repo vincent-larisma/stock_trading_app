@@ -1,7 +1,19 @@
-<h1>Find Stock</h1>
 
-<%= form_with url: find_stock_path, method: :get do |form| %>
-  <%= form.label "Search Stock"%>
-  <%= form.text_field :search_stock %>
-  <%= form.submit "Search" %>
-<% end %>
+<div class="container d-flex justify-content-center my-5">
+  <div class="card" style="width: 25rem;">
+    <div class="card-body">
+      <h5 class="card-title">Find Stock</h5>
+      <p class="card-text">
+        <%= form_with url: find_stock_path, method: :get do |form| %>
+          <div class="form-floating">
+            <%= form.text_field :search_stock, class:"form-control", placeholder: "Search Stock" %>
+            <%= form.label "search stock", class:"form-label"%>
+          </div>
+          <%= form.submit "Search", class: "btn btn-dark mt-2" %>
+        <% end %>
+      </p>
+    </div>
+  </div>
+</div>
+
+
