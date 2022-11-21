@@ -1,10 +1,11 @@
+<% if current_user.trader? %>
 <div class="container my-5">
     <div class="row">
         <div class="col">
             <h1>My Portfolio</h1>
         </div>
     </div>
-    <div class="row mb-1">
+    <div class="row mb-1"> 
         <div class="col d-flex flex-row justify-content-end ">
             <%= button_to "+ Buy Stock", find_stock_path, method: :get, class: "mx-1 btn btn-dark rounded-0"  %>
             <button type="button" class="mx-1 btn btn-info rounded-0" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
@@ -52,8 +53,9 @@
         </table>
     </div>
 </div>
+    <%= render "partials/modal" %>
+<% end %>
 
-<%= render "partials/modal" %>
 
 
 

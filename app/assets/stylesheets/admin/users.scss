@@ -5,3 +5,31 @@
 #admin-user-table {
     text-align: center;
 }
+
+.create-user-input{
+    width: 500px;
+}
+
+#create-user-form {
+    margin-top: 50px;
+    border: 2px solid black;
+    width: 40%;
+    border-radius: 10px;
+}
+
+.create-user-container {
+    display: flex;
+    justify-content: center;
+}
+
+#form-email {
+    margin-top: 20px;
+}
+
+#form-confirm-password {
+    margin-bottom: 20px;
+}
+
+#create-user-btn {
+    margin-bottom: 20px;
+}

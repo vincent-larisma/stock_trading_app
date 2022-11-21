@@ -1,7 +1,6 @@
 .header-app-name {
     color: white;
     font-size: 25px;
-    margin-right: 45%;
 }
 
 .nav-link, .navbar-brand {
@@ -9,5 +8,7 @@
 }
 
 .nav-link:hover {
-    color: #B2B2B2;
+    color: #ffff;
+    background-color: #00ABB3;
+    border-radius: 3px;
 }

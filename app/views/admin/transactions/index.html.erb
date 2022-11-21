@@ -1,21 +1,26 @@
-<h1>Transactions</h1>
-<table class="table" id="transaction-user-table">
-  <thead>
-    <tr>
-      <th scope="col">Company Name</th>
-      <th scope="col">Shares</th>
-      <th scope="col">Cost Price</th>
-      <th scope="col">User</th>
-      <th scope="col">Type</th>
-    </tr>
-  </thead>
-  <% @transactions.each do |transaction| %>
-    <tr>
-      <th scope="row"><%= transaction.company_name %>asdfsadf</th>
-      <td><%= transaction.shares %></td>
-      <td><%= number_to_currency(transaction.cost_price) %></td>
-      <td><%= User.find(transaction.user_id).email %></td>
-      <td><%= transaction.action_type %></td>
-    </tr>
-    <% end %>
-</table>
+<div class="container my-5">
+  <div class="row">
+    <table class="table table-bordered text-center">
+      <thead>
+        <tr class= "text-light" style="background-color: #3C4048;">
+          <th scope="col">Company Name</th>
+          <th scope="col">Shares</th>
+          <th scope="col">Cost Price</th>
+          <th scope="col">User</th>
+          <th scope="col">Type</th>
+        </tr>
+      </thead>
+      <tbody class="table-group-divider">
+        <% @transactions.each do |transaction| %>
+          <tr>
+            <td><%= transaction.company_name %>asdfsadf</td>
+            <td><%= transaction.shares %></td>
+            <td><%= number_to_currency(transaction.cost_price) %></td>
+            <td><%= User.find(transaction.user_id).email %></td>
+            <td><%= transaction.action_type %></td>
+          </tr>
+        <% end %>
+      </body>
+    </table>
+  </div>
+</div>
