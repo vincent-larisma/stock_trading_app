@@ -51,8 +51,6 @@ class Admin::UsersController < ApplicationController
     @user = User.find(params[:id])
     @user.destroy
     redirect_to admin_users_path, notice: "User #{@user.email} has been deleted."
-    super
-    flash.delete(:notice)
   end
 
 
