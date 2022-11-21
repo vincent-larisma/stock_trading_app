@@ -1,5 +1,5 @@
 class StocksController < ApplicationController
-    before_action :authenticate_user!
+    before_action :authenticate_user!, :is_approved?
     before_action :initialize_stock, :search_stock_and_initialize, only: [:create, :update]
 
     def index
