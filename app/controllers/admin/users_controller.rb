@@ -23,7 +23,7 @@ class Admin::UsersController < ApplicationController
       end
   
       if @user.save
-        redirect_to admin_users_path, notice: "User with email #{@user.email} successfully created" 
+        redirect_to admin_users_path, notice: "User with email #{@user.email} successfully created!" 
       else
         render :new
       end
