@@ -4,8 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :confirmable
 
-  has_many :stocks
-  has_many :transactions
+  has_many :stocks, dependent: :delete_all
+  has_many :transactions, dependent: :delete_all
 
   enum role: [:trader, :admin]
   enum account_status: [:pending, :approved, :null]
