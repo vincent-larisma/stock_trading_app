@@ -1,6 +1,6 @@
 class Admin::UsersController < ApplicationController
   before_action :authenticate_user!, :is_admin?
-
+ 
   def index
       @users = User.where(role: :trader)
   end
@@ -36,13 +36,14 @@ class Admin::UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     
-    if @user.update(user_params)
+    if user_params[:account_status] != @user.account_status 
       ApproveEmailMailer.approve_trader_email(@user).deliver_now
-      redirect_to admin_user_path(params[:id]), notice: 'Your account has been approved by the admin.'
+      redirect_to admin_user_path(params[:id])
+    elsif @user.update(user_params)
+      redirect_to admin_user_path(params[:id])
     else
       render :edit
-    end
-    
+    end 
   end
 
 
@@ -57,7 +58,7 @@ class Admin::UsersController < ApplicationController
 
 
     def user_params
-        params.require(:user).permit(:email, :password, :password_confirmation, :role, :account_status)
+        params.require(:user).permit(:account_status, :email, :password, :password_confirmation, :role)
     end
 
 end
