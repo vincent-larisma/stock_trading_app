@@ -11,6 +11,7 @@
         </tr>
       </thead>
     <tbody class="table-group-divider">
+    <% if @users.count > 0 %> 
       <% @users.each do |user| %>
         <tr>
           <th scope="row"><%= user.id %></th>
@@ -26,6 +27,13 @@
           </td>
         </tr>
       <% end %>
+      <% else %>
+      <tr>
+          <td colspan="6">
+            <h2 class="m-5">No Records Found...</h2>
+          </td>
+      </tr>
+      <% end  %>
     </tbody>
     </table>
   </div>
