@@ -17,7 +17,7 @@ class TradesController < ApplicationController
     def sell_stock
         begin
             @quote = @client.quote(params[:symbol])
-            @user_stock_shares = current_user.stocks.find_by(symbol: params[:symbol]).shares.to_f
+            @user_stock_shares = current_user.stocks.find_or_initialize_by(symbol: params[:symbol]).shares.to_f
             @stock = current_user.stocks.find_by(symbol: params[:symbol])
 
         rescue IEX::Errors::SymbolNotFoundError
@@ -29,7 +29,7 @@ class TradesController < ApplicationController
     def buy_stock
         begin
             @quote = @client.quote(params[:symbol])
-            @user_stock_shares = current_user.stocks.find_by(symbol: params[:symbol]).shares.to_f
+            @user_stock_shares = current_user.stocks.find_or_initialize_by(symbol: params[:symbol]).shares.to_f
             @stock = current_user.stocks.build
 
         rescue IEX::Errors::SymbolNotFoundError
