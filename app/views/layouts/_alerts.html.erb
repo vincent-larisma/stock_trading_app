@@ -1,2 +1,13 @@
-<p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>
+
+<% flash.each do |type, msg| %>
+  <% if type == "notice" %>
+    <div class="alert rounded-0 d-flex justify-content-center py-1 alert-success" role="alert">
+  <% elsif type == "alert" %>
+    <div class="alert rounded-0 d-flex justify-content-center py-1 alert-danger" role="alert">
+  <% else %>
+    <div class='alert rounded-0 d-flex justify-content-center py-1 alert-<%= "#{type}" %>' role="alert">
+  <% end %>
+    <%= msg %>
+</div>
+<% end %>
+

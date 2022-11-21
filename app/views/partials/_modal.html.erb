@@ -1,0 +1,33 @@
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header bg-dark text-light">
+        <h1 class="modal-title fs-5 " id="staticBackdropLabel">History</h1>
+        <button type="button" class="btn-close bg-light" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <% if @previous_stocks.count > 0 %>
+            <table class="table table-bordered text-center">
+                <tr>
+                    <th>Company name</th>
+                    <th>Cost price ($)</th>
+                    <th>Action</th>
+                </tr>
+                <% @previous_stocks.each do |p_stock| %>
+                    <tr>
+                        <td><%= p_stock.company_name %></td>
+                        <td><%= number_to_currency(p_stock.cost_price) %></td>
+                        <td>
+                            <%= button_to "Buy Again", buy_stock_path(p_stock.symbol), method: :get %>
+                        </td>
+                    </tr>
+                <% end %>
+            </table>
+        <% else %>
+            <h3>No Records Yet</h3>
+        <% end %>
+        
+      </div>
+    </div>
+  </div>
+</div>

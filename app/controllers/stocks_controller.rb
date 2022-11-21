@@ -1,6 +1,6 @@
 class StocksController < ApplicationController
     before_action :authenticate_user!
-    before_action :initialize_stock, only: [:create, :update]
+    before_action :initialize_stock, :search_stock, only: [:create, :update]
 
     def index
         @stocks = current_user.stocks.where("shares > ?", 0)
@@ -9,22 +9,16 @@ class StocksController < ApplicationController
 
     def create
         begin    
-            @quote = @client.quote(params[:symbol])
-            @stock = current_user.stocks.find_or_initialize_by(symbol: params[:symbol])
+        #manually add params
+        @stock.shares += stock_params[:shares].to_i
 
-            #manually add params
-            @stock.shares += stock_params[:shares].to_i
-            @stock.symbol = @quote.symbol
-            @stock.company_name = @quote.company_name 
-            @stock.cost_price = @quote.latest_price
-
-            if @stock.save
-                current_user.transactions.create(action_type: 'buy', company_name: @quote.company_name, shares: @stock.shares, cost_price: @quote.latest_price)
-                redirect_to root_path
-                ApproveEmailMailer.approve_email(current_user, @stock).deliver_now
-            else
-                redirect_to find_stock_path
-            end
+        if @stock.save
+            current_user.transactions.create(action_type: 'buy', company_name: @quote.company_name, shares: @stock.shares, cost_price: @quote.latest_price)
+            redirect_to root_path
+            ApproveEmailMailer.approve_email(current_user, @stock).deliver_now
+        else
+            redirect_to find_stock_path
+        end
 
         rescue IEX::Errors::SymbolNotFoundError
             flash[:error] = "Sorry, the symbol is not valid."
@@ -34,23 +28,17 @@ class StocksController < ApplicationController
 
     def update
         begin    
-            @quote = @client.quote(params[:symbol])
-            @stock = current_user.stocks.find_by(symbol: params[:symbol])
+        #manually add params
+        @stock.shares -= stock_params[:shares].to_i
 
-            #manually add params
-            @stock.shares -= stock_params[:shares].to_i
-            @stock.symbol = @quote.symbol
-            @stock.company_name = @quote.company_name 
-            @stock.cost_price = @quote.latest_price
-
-            if @stock.shares >= 0
-                @stock.save
-                current_user.transactions.create(action_type: 'sell', company_name: @quote.company_name, shares: @stock.shares, cost_price: @quote.latest_price)
-                redirect_to root_path
-            else
-                flash[:error] = "Sorry, cannot be negative."
-                redirect_to sell_stock_path(params[:symbol])
-            end
+        if stock_params[:shares].to_i >= 0
+            @stock.save
+            current_user.transactions.create(action_type: 'sell', company_name: @quote.company_name, shares: @stock.shares, cost_price: @quote.latest_price)
+            redirect_to root_path
+        elsif stock_params[:shares].to_i < 0
+            flash[:error] = "Sorry, cannot be negative."
+            redirect_to sell_stock_path(params[:symbol])
+        end
 
         rescue IEX::Errors::SymbolNotFoundError
             flash[:error] = "Sorry, the symbol is not valid."
@@ -67,4 +55,13 @@ class StocksController < ApplicationController
         params.require(:stock).permit(:symbol, :company_name, :shares, :cost_price)
     end
 
+    def search_stock
+        @quote = @client.quote(params[:symbol])
+        @stock = current_user.stocks.find_by(symbol: params[:symbol])
+
+        @stock.symbol = @quote.symbol
+        @stock.company_name = @quote.company_name 
+        @stock.cost_price = @quote.latest_price
+
+    end
 end

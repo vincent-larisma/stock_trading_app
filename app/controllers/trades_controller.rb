@@ -3,12 +3,14 @@ class TradesController < ApplicationController
     before_action :initialize_stock
 
     def find_stock
-        begin
-            quote = @client.quote(params[:search_stock])
-            redirect_to buy_stock_path(params[:search_stock]) # '/buy_stock/GOOGL'
-        rescue IEX::Errors::SymbolNotFoundError
-            flash[:error] = "Sorry, the symbol is not valid."
-            render :find_stock 
+        if params[:search_stock]
+            begin
+                quote = @client.quote(params[:search_stock])
+                redirect_to buy_stock_path(params[:search_stock]) # '/buy_stock/GOOGL'
+            rescue IEX::Errors::SymbolNotFoundError
+                flash[:error] = "Sorry, the symbol is not valid."
+                render :find_stock 
+            end
         end
     end
 
@@ -42,6 +44,5 @@ class TradesController < ApplicationController
     
     def stock_params
         params.require(:stock).permit(:symbol, :company_name, :shares, :cost_price)
-        # params.require(:stock).permit(:shares)
     end
 end
