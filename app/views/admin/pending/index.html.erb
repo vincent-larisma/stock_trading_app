@@ -1,24 +1,29 @@
-<h1>Pending Traders</h1>
-<table class="table" id="admin-pending-table">
-  <thead>
-    <tr>
-      <th scope="col">ID</th>
-      <th scope="col">Email</th>
-      <th scope="col">Role</th>
-      <th scope="col">Approval</th>
-    </tr>
-  </thead>
-  <% @traders.each do |trader| %>
-    <tr>
-      <th scope="row"><%= trader.id %></th>
-      <td><%= trader.email %></td>
-      <td><%= trader.role %></td>
-      <td> 
-                <%= form_with model: [:admin, User.find(trader.id)] do |f|%>
-                    <%= f.hidden_field :account_status, value: "approved" %>
-                    <%= f.submit "Approve User" %>
-                <% end %>
+<div class="container my-5">
+  <div class="row">
+    <table class="table table-bordered text-center">
+      <thead>
+        <tr class= "bg-dark text-light">
+          <th scope="col">ID</th>
+          <th scope="col">Email</th>
+          <th scope="col">Role</th>
+          <th scope="col">Approval</th>
+        </tr>
+      </thead>
+      <tbody class="table-group-divider">
+        <% @traders.each do |trader| %>
+          <tr>
+            <th scope="row"><%= trader.id %></th>
+            <td><%= trader.email %></td>
+            <td><%= trader.role %></td>
+            <td> 
+              <%= form_with model: [:admin, User.find(trader.id)] do |f|%>
+              <%= f.hidden_field :account_status, value: "approved" %>
+              <%= f.submit "Approve User", class: "btn btn-success" %>
+              <% end %>
             </td>
-    </tr>
-    <% end %>
-</table>
+          </tr>
+        <% end %>
+      </body>
+    </table>
+  </div>
+</div>

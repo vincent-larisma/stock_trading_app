@@ -2,7 +2,7 @@ class Admin::UsersController < ApplicationController
   before_action :authenticate_user!, :is_admin?
 
   def index
-      @users = User.all.order(id: :asc )
+      @users = User.where(role: :trader)
   end
 
   def show 
