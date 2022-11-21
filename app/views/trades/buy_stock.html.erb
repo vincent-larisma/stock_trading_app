@@ -1,14 +1,39 @@
-<h1>Buying <%= @quote.company_name %>(<%= @quote.symbol %>)</h1>
-
-<table>
-<tr><th>Symbol</th><td><%= @quote.symbol %></td></tr>
-<tr><th>Company Name</th><td><%= @quote.company_name %></td></tr>
-<tr><th>Price</th><td><%= @quote.latest_price %></td></tr>
-</table>
-
-<%= form_with model: @stock do |form| %>
-    <%= form.label :shares %>
-    <%= form.number_field :shares %>
-    <%= hidden_field_tag :symbol, @quote.symbol  %>
-    <%= form.submit "Buy Stock" %>
-<% end %>
+<div class="container d-flex justify-content-center my-5">
+  <div class="card rounded-0 shadow-sm" style="width: 30rem;">
+    <div class="card-body">
+      <p class="card-title text-success">BUYING</p>
+      <p class="card-text">
+        <table class="table text-center">
+            <tr><th class="display-6" colspan="2" style="font-size: 2rem;"><%= @quote.company_name %>(<%= @quote.symbol %>)</th></tr>
+            <tr><th scope="row">Symbol</th><td><%= @quote.symbol %></td></tr>
+            <tr><th scope="row">Company Name</th><td><%= @quote.company_name %></td></tr>
+            <tr><th scope="row">Price</th><td><%= @quote.latest_price %></td></tr>
+        </table>
+        
+        <div class="container">
+            <div class="card bg-light">
+                <div class="card-body">
+                    <h6>You currently own <%= @user_stock_shares %> shares of <%= @quote.company_name %></h6>
+                    <%= form_with model: @stock, class: "mt-2" do |form| %>
+                        <div class="form-floating">
+                            <%= form.number_field :shares, class:"form-control", placeholder: "input amount", value: "" %>
+                            <%= form.label "Input Shares", class:"form-label" %>
+                        </div>
+                        <%= hidden_field_tag :symbol, @quote.symbol  %>
+                        
+                        <div class="d-grid gap-2 shadow-sm">
+                            <%= form.submit "Buy #{@quote.company_name}", class: "btn btn-outline-success mt-2" %>
+                        </div>
+                        
+                    <% end %>
+                </div>
+            </div>
+         
+            <div class="row mt-2"><%= link_to "Back to Portfolio", stocks_path, style: "text-decoration: none;" %></div>
+            <div class="row" ><%= link_to "New Quote", find_stock_path, style: "text-decoration: none;"%></div>
+            
+        </div>
+      </p>
+    </div>
+  </div>
+</div>

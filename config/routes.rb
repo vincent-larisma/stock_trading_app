@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
+  root "home#index"
+  devise_for :users 
 
-  root "stocks#index"
-  devise_for :users
   
   namespace :admin do
     resources :users
@@ -17,6 +17,5 @@ Rails.application.routes.draw do
   get "/sell_stock/:symbol", to: "trades#sell_stock", as: "sell_stock"
   get "/buy_stock/:symbol", to: "trades#buy_stock", as: "buy_stock"
   get "/find_stock", to: "trades#find_stock", as: "find_stock"
-  
 
 end
