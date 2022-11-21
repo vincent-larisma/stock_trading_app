@@ -1,6 +1,5 @@
 class TradesController < ApplicationController
-    before_action :authenticate_user!
-    before_action :initialize_stock
+    before_action :authenticate_user!, :is_approved?, :initialize_stock
 
     def find_stock
         if params[:search_stock]
