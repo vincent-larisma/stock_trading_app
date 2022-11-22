@@ -37,7 +37,10 @@ class Admin::UsersController < ApplicationController
     @user = User.find(params[:id])
     
     if user_params[:account_status] != @user.account_status 
-      ApproveEmailMailer.approve_trader_email(@user).deliver_now
+      @user.update(user_params)
+      if user_params[:account_status] == "approved" 
+        ApproveEmailMailer.approve_trader_email(@user).deliver_now
+      end
       redirect_to admin_user_path(params[:id])
     elsif @user.update(user_params)
       redirect_to admin_user_path(params[:id])
