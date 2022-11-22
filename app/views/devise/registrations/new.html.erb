@@ -1,9 +1,9 @@
 <div class="">
   <section class="reg-user-form">
-  <div class="register-icon">
+  <div class="register-icon text-light p-2" style="background-color: #3C4048; border-radius: 10px;">
     <i class="bi bi-person-vcard"></i>
+    <p class="reg-user-tag"> Register </p> 
   </div>
-  <p class="reg-user-tag"> Register </p> 
   <hr> 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
