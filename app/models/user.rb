@@ -11,6 +11,7 @@ class User < ApplicationRecord
   enum account_status: [:pending, :approved, :null]
   after_initialize :set_default_role_and_account_status, :if  => :new_record?
 
+  validates :role, :account_status, presence: true
 
   private
   def set_default_role_and_account_status
