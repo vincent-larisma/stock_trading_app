@@ -25,47 +25,7 @@
     justify-content: center;
 }
 
-.forgot-pasword-link {
-    text-decoration: none;
-    background-image: linear-gradient(
-    to right,
-    #0eb6f4,
-    #00bbff 50%,
-    #000 50%
-  );
-  background-size: 200% 100%;
-  background-position: -100%;
-  display: inline-block;
-  padding: 5px 0;
-  position: relative;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  transition: all 0.3s ease-in-out;
-}
-
-.forgot-pasword-link:before {
-    content: '';
-    background: #54b3d6;
-    display: block;
-    position: absolute;
-    bottom: -3px;
-    left: 0;
-    width: 0;
-    height: 3px;
-    transition: all 0.3s ease-in-out;
-  }
-
-.forgot-pasword-link:hover {
-    background-position: 0;
-}
-
-.forgot-pasword-link:hover::before {
-    width:100%;
-  }
-
-
-
-.signup-link, .didnt-receive-link {
+.signup-link, .didnt-receive-link, .login-link, .forgot-pasword-link {
     text-decoration: none;
     background-image: linear-gradient(
     to right,
@@ -83,7 +43,7 @@
   transition: all 0.3s ease-in-out;
 }
 
-.signup-link:before, .didnt-receive-link:before {
+.signup-link:before, .didnt-receive-link:before, .login-link:before, .forgot-pasword-link:before {
     content: '';
     background: #54b3d6;
     display: block;
@@ -95,10 +55,10 @@
     transition: all 0.3s ease-in-out;
   }
 
-  .signup-link:hover, .didnt-receive-link:hover{
+  .signup-link:hover, .didnt-receive-link:hover, .login-link:hover, .forgot-pasword-link:hover {
     background-position: 0;
 }
 
-.signup-link:hover::before, .didnt-receive-link:hover::before {
+.signup-link:hover::before, .didnt-receive-link:hover::before, .login-link:hover::before, .forgot-pasword-link:hover::before {
     width:100%;
   }
