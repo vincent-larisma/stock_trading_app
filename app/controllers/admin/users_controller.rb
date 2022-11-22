@@ -1,5 +1,8 @@
 class Admin::UsersController < ApplicationController
   before_action :authenticate_user!, :is_admin? 
+
+  include ActiveModel::Dirty
+  define_attribute_methods :account_status
  
   def index
       @users = User.where(role: :trader)
@@ -36,7 +39,7 @@ class Admin::UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     
-    if user_params[:account_status] != @user.account_status 
+    if @user.account_status_changed? 
       ApproveEmailMailer.approve_trader_email(@user).deliver_now
       redirect_to admin_user_path(params[:id])
     elsif @user.update(user_params)
