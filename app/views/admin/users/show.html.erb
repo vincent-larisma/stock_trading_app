@@ -14,9 +14,6 @@
         <th>Account Status</th> 
         <td><%= @user.account_status %></td>
     </tr>
-    <tr>
-        <th>Action</th>
-    </tr>
 </table>
     <div class="actions d-flex justify-content-center mt-3 gap-4"> 
         <%= button_to "Edit", edit_admin_user_path(@user.id), method: :get, class: "btn btn-primary w-100" %>
