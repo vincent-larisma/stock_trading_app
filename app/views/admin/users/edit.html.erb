@@ -2,22 +2,22 @@
   <section class="user-edit-form">
   <p class="user-edit-tag"> Edit User </p> 
 <%= form_with model: [:admin, @user] do |form| %>
-    <table>
+    <table class="edit-table-attribute">
         <tr>
-            <th ><%= form.label :email, class: "form-label" %></th>
-            <td><%= form.text_field :email, class: "form-control pl-3", class: "form-control" %></td>
-        </tr>
+            <th ><%= form.label :email, class: "form-label" %>:</th>
+            <td class="edit-user-email"><%= form.text_field :email, class: "form-control pl-3", class: "form-control" %></td>
+        </tr> 
         <tr>
             <th>
-                 Role
+                 Role:
             </th>
-            <td class="mb-3 text-center">
-                <%= @user.role  %>
+            <td class="edit-user-role">
+                <%= @user.role.capitalize  %>
             </td>
         </tr>
         <tr>
-            <th>Account Status</th>
-            <td class="mb-3 text-center">
+            <th>Account Status:</th>
+            <td class="mb-3" id="mark-as-approve">
             <%= form.label :account_status do %>
                 <%= form.check_box :account_status, {}, "approved", "pending" %>
                 Mark as Approved?
@@ -26,9 +26,10 @@
         </tr>
         <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
         </table>
-        <div class="actions d-flex justify-content-center mt-3">
-            <td><%= form.submit "Update User", class: "btn btn-primary w-50" %></td>
+        <div class="actions d-flex justify-content-center mt-3" >
+            <td><%= form.submit "Update User", class: "btn btn-primary w-50"%></td>
        </div>
 <% end %>
 </section> 
 </div>
+
