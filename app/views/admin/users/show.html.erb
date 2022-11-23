@@ -1,18 +1,18 @@
 <div class="">
   <section class="user-show-form">
   <p class="user-show-tag"> Edit User </p> 
-<table>
+<table class="show-table-attribute">
     <tr>
-        <th>Email</th> 
+        <th>Email:</th> 
         <td><%= @user.email %></td>
     </tr>
     <tr>
-        <th>Role</th> 
-        <td><%= @user.role %></td>
+        <th>Role:</th> 
+        <td><%= @user.role.capitalize %></td>
     </tr>
     <tr>
-        <th>Account Status</th> 
-        <td><%= @user.account_status %></td>
+        <th>Account Status:</th> 
+        <td><%= @user.account_status.capitalize %></td>
     </tr>
 </table>
     <div class="actions d-flex justify-content-center mt-3 gap-4"> 
