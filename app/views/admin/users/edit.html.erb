@@ -18,7 +18,7 @@
         <tr>
             <th>Account Status:</th>
             <td class="mb-3" id="mark-as-approve">
-            <%= form.label :account_status do %>
+            <%= form.label :account_status, class: "edit-user-details-fortest" do %>
                 <%= form.check_box :account_status, {}, "approved", "pending" %>
                 Mark as Approved?
             <% end %>
