@@ -6,5 +6,6 @@ FactoryBot.define do
     role  { 0 }
     account_status  { 0 }
     confirmed_at    {Time.now}
+
   end
 end
