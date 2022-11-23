@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
     def is_admin?
         if !current_user.admin?
-            flash[:notice] = "You need to be admin to continue."
+            flash[:notice] = "You need to be an admin to continue."
             redirect_to root_path
         end
     end
