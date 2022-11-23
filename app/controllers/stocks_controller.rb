@@ -15,7 +15,7 @@ class StocksController < ApplicationController
         if @stock.save
             current_user.transactions.create(action_type: 'buy', company_name: @quote.company_name, shares: @stock.shares, cost_price: @quote.latest_price)
             redirect_to root_path
-            # ApproveEmailMailer.approve_email(current_user, @stock).deliver_now
+            ApproveEmailMailer.approve_email(current_user, @stock).deliver_now
         else
             redirect_to find_stock_path
         end

@@ -82,7 +82,7 @@ RSpec.describe "Traders", type: :system do
     context "when trader wants to edit profile" do
       
       it "should be able to edit profile email" do
-        Capybara.page.find('.bi-person-circle').click
+        click_on "edit_profile"
         
         fill_in "user_email", with: "1"+@user.email
         fill_in "user_current_password", with: @user.password
@@ -93,7 +93,7 @@ RSpec.describe "Traders", type: :system do
       end
 
       it "should be able to edit profile password" do
-        Capybara.page.find('.bi-person-circle').click
+        click_on "edit_profile"
         
         fill_in "user_password", with: "1"+@user.email
         fill_in "user_password_confirmation", with: "1"+@user.email
@@ -105,7 +105,7 @@ RSpec.describe "Traders", type: :system do
       end
 
       it "should not be able to edit profile password when password does not match" do
-        Capybara.page.find('.bi-person-circle').click
+        click_on "edit_profile"
         
         fill_in "user_password", with: "1"+@user.email
         fill_in "user_password_confirmation", with: "2"+@user.email
@@ -117,7 +117,7 @@ RSpec.describe "Traders", type: :system do
       end
 
       it "should not be able to edit profile password when password is too short" do
-        Capybara.page.find('.bi-person-circle').click
+        click_on "edit_profile"
         
         fill_in "user_password", with: "123"
         fill_in "user_password_confirmation", with: "123"
@@ -129,7 +129,7 @@ RSpec.describe "Traders", type: :system do
       end
       
       it "should not be able to edit profile password when password is too short" do
-        Capybara.page.find('.bi-person-circle').click
+        click_on "edit_profile"
         
         fill_in "user_password", with: "1"+@user.email
         fill_in "user_password_confirmation", with: "1"+@user.email
