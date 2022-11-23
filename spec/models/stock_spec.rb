@@ -14,3 +14,5 @@ RSpec.describe Stock, type: :model do
     end
   end
 end
+
+
