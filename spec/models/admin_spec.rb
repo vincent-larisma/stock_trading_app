@@ -16,5 +16,10 @@ RSpec.describe Admin, type: :model do
         expect(user1.nil?).to be true
       end
     end
+  end 
+
+  it "should create a user which account status is pending by default" do
+    user =  FactoryBot.create(:user)
+    expect(user).to be_trader
   end
 end 
