@@ -11,11 +11,13 @@ class StocksController < ApplicationController
         begin
         #manually add params
         @stock.shares += stock_params[:shares].to_i
+
+        @stocks_bought = stock_params[:shares].to_i
         
         if @stock.save
             current_user.transactions.create(action_type: 'buy', company_name: @quote.company_name, shares: @stock.shares, cost_price: @quote.latest_price)
             redirect_to root_path
-            ApproveEmailMailer.approve_email(current_user, @stock).deliver_now
+            ApproveEmailMailer.buy_stocks(current_user, @stock, @stocks_bought).deliver_now
         else
             redirect_to find_stock_path
         end
