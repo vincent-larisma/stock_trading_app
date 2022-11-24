@@ -10,7 +10,7 @@ RSpec.describe "Traders", type: :system do
     it "should load to unapproved page when trader account status is pending" do
       login_as(FactoryBot.create(:user, account_status: 'pending'))
       visit root_path
-      expect(page).to have_content "You are Yet to be Approved..."
+      expect(page).to have_content "Please wait for the admin to approve yor account."
     end
 
     it "should load to my portfolio when trader account status is approved" do
