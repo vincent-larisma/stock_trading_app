@@ -1,17 +1,16 @@
 class StocksController < ApplicationController
     before_action :authenticate_user!, :is_approved?
-    before_action :initialize_stock, :search_stock_and_initialize, only: [:create, :update]
+    before_action :initialize_stock, :initialize_searched_stock, only: [:create, :update]
+
+    rescue_from IEX::Errors::SymbolNotFoundError, with: :not_valid_symbol
 
     def index
-        @stocks = current_user.stocks.where("shares > ?", 0)
-        @previous_stocks = current_user.stocks.where("shares = ?", 0)
+        @stocks = current_user.stocks.bought_stock
+        @previous_stocks = current_user.stocks.previously_bought_stock
     end
 
     def create
-        begin
-        #manually add params
         @stock.shares += stock_params[:shares].to_i
-
         @stocks_bought = stock_params[:shares].to_i
         
         if @stock.save
@@ -21,30 +20,19 @@ class StocksController < ApplicationController
         else
             redirect_to find_stock_path
         end
-
-        rescue IEX::Errors::SymbolNotFoundError
-            flash[:error] = "Sorry, the symbol is not valid."
-            redirect_to find_stock_path
-        end
     end
 
     def update
-        begin
-        #manually add params
         @stock.shares -= stock_params[:shares].to_i
-
+        
         if @stock.shares.to_i >= 0
+
             @stock.save
             current_user.transactions.create(action_type: 'sell', company_name: @quote.company_name, shares: @stock.shares, cost_price: @quote.latest_price)
             redirect_to root_path
         elsif @stock.shares.to_i < 0
             flash[:error] = "Sorry, cannot be negative."
             redirect_to sell_stock_path(params[:symbol])
-        end
-
-        rescue IEX::Errors::SymbolNotFoundError
-            flash[:error] = "Sorry, the symbol is not valid."
-            redirect_to find_stock_path
         end
     end
 
@@ -57,7 +45,7 @@ class StocksController < ApplicationController
         params.require(:stock).permit(:symbol, :company_name, :shares, :cost_price)
     end
 
-    def search_stock_and_initialize
+    def initialize_searched_stock #manually add params
         @quote = @client.quote(params[:symbol])
         @stock = current_user.stocks.find_or_initialize_by(symbol: params[:symbol])   
             

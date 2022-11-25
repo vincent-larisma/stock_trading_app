@@ -2,7 +2,7 @@ class Admin::UsersController < ApplicationController
   before_action :authenticate_user!, :is_admin? 
  
   def index
-      @users = User.where(role: :trader)
+      @users = User.trader
   end
 
   def show 
@@ -58,7 +58,6 @@ class Admin::UsersController < ApplicationController
 
 
   private
-
     def user_params
         params.require(:user).permit(:account_status, :email, :password, :password_confirmation, :role)
     end
