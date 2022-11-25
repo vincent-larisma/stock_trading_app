@@ -11,6 +11,10 @@ class User < ApplicationRecord
   enum account_status: [:pending, :approved, :null]
   after_initialize :set_default_role_and_account_status, :if  => :new_record?
 
+  
+  scope :trader, -> { where(role: :trader) }
+  scope :pendings, -> { where(account_status: :pending) }
+
   validates :role, :account_status, presence: true
 
   private
