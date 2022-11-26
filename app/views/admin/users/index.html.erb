@@ -16,8 +16,8 @@
         <tr>
           <th scope="row"><%= user.id %></th>
           <td><%= user.email %></td>
-          <td><%= user.role %></td>
-          <td><%= user.account_status %></td>
+          <td><%= user.role.capitalize %></td>
+          <td><%= user.account_status.capitalize %></td>
           <td>
             <div class="d-flex flex-row justify-content-center gap-1">
               <%= link_to "Show", admin_user_path(user.id), class: "btn btn-primary"%> 

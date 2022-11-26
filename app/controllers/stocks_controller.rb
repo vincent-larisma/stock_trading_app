@@ -24,11 +24,13 @@ class StocksController < ApplicationController
 
     def update
         @stock.shares -= stock_params[:shares].to_i
+        @stocks_sold = stock_params[:shares].to_i
         
         if @stock.shares.to_i >= 0
 
             @stock.save
             current_user.transactions.create(action_type: 'sell', company_name: @quote.company_name, shares: @stock.shares, cost_price: @quote.latest_price)
+            ApproveEmailMailer.sold_stocks(current_user, @stock, @stocks_sold).deliver_now
             redirect_to root_path
         elsif @stock.shares.to_i < 0
             flash[:error] = "Sorry, cannot be negative."

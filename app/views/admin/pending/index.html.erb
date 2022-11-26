@@ -15,7 +15,7 @@
           <tr>
             <th scope="row"><%= trader.id %></th>
             <td><%= trader.email %></td>
-            <td><%= trader.role %></td>
+            <td><%= trader.role.capitalize %></td>
             <td> 
               <%= form_with model: [:admin, User.find(trader.id)] do |f|%>
               <%= f.hidden_field :account_status, value: "approved" %>

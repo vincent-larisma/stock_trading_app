@@ -8,7 +8,7 @@
 User.destroy_all
 
 user = User.new(
-    email: 'justinebanogon12@gmail.com', 
+    email: 'wetradestocks1@gmail.com', 
     password: 'justine', 
     password_confirmation: 'justine',
     role: 1,
@@ -17,4 +17,4 @@ user = User.new(
   user.skip_confirmation!
   user.save!
   
-p "Created #{User.count} as user"4
+p "Created #{User.count} as user"
