@@ -11,10 +11,10 @@ user = User.new(
     email: 'justinebanogon12@gmail.com', 
     password: 'justine', 
     password_confirmation: 'justine',
-    role: 1,
+    role: 0,
     account_status: 1,
   )
   user.skip_confirmation!
   user.save!
   
-p "Created #{User.count} as user"4
+p "Created #{User.count} as user"

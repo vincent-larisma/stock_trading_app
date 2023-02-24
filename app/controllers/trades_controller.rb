@@ -22,7 +22,7 @@ class TradesController < ApplicationController
     private
 
     def initialize_stock
-        @client = IEX::Api::Client.new( publishable_token: 'pk_d10cc347da074a029aa3f948a7dc4e47', secret_token: 'sk_3d7f3084534a4f2fb80218e34f340b64', endpoint: 'https://cloud.iexapis.com/v1')
+        @client = IEX::Api::Client.new( publishable_token: 'pk_08677868f8fd4d0e89cd809aa25fadf9', secret_token: 'sk_dc6f09d4cde64e89928f97be5c1a7bfb', endpoint: 'https://cloud.iexapis.com/v1')
     end
 
     def initialize_trade_info #buy & sell info (trade action)
