@@ -15,15 +15,15 @@
 # gem 'pg'
 #
 default: &default
-  adapter: postgresql
-  encoding: unicode
-  # For details on connection pooling, see Rails configuration guide
-  # https://guides.rubyonrails.org/configuring.html#database-pooling
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  adapter: "postgresql"
+  host: "containers-us-west-199.railway.app"
+  username: "postgres"
+  password: "dwMWY8SJVFuv5pvkHzod"
+  port: "6219"
 
 development:
   <<: *default
-  database: stock_trading_app_development
+  database: railway
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -81,6 +81,7 @@ test:
 #
 production:
   <<: *default
-  database: stock_trading_app_production
+  ur: <&= ENV["DATABASE_URL"]&>
+  database: railway
   username: stock_trading_app
   password: <%= ENV['STOCK_TRADING_APP_DATABASE_PASSWORD'] %>
