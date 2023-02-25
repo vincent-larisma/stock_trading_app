@@ -7,8 +7,6 @@ gem 'iex-ruby-client'
 
 gem 'devise', '~> 4.8', '>= 4.8.1'
 
-gem 'net-smtp', require: false
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.7'
 # Use postgresql as the database for Active Record
@@ -67,3 +65,7 @@ gem "factory_bot", "~> 6.2"
 gem "dockerfile-rails", ">= 1.2", :group => :development
 
 gem "redis", "~> 5.0"
+
+gem 'net-smtp', require: false
+gem 'net-imap', require: false
+gem 'net-pop', require: false
